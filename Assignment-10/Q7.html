@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Word & Character Counter</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 50px;
+      }
+      textarea {
+        width: 80%;
+        height: 150px;
+        padding: 10px;
+        font-size: 16px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        resize: none;
+      }
+      .counter {
+        margin-top: 10px;
+        font-size: 18px;
+      }
+      .alert {
+        color: red;
+        font-weight: bold;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Live Word & Character Counter</h1>
+    <textarea id="textInput" placeholder="Start typing..."></textarea>
+    <div class="counter">
+      <p>Characters: <span id="charCount">0</span> / 200</p>
+      <p>Words: <span id="wordCount">0</span></p>
+      <p class="alert" id="alertMessage">⚠️ Character limit exceeded!</p>
+    </div>
+
+    <script>
+      const textInput = document.getElementById("textInput");
+      const charCount = document.getElementById("charCount");
+      const wordCount = document.getElementById("wordCount");
+      const alertMessage = document.getElementById("alertMessage");
+
+      textInput.addEventListener("input", () => {
+        let text = textInput.value;
+        let characters = text.length;
+        let words =
+          text.trim().length === 0 ? 0 : text.trim().split(/\s+/).length;
+
+        charCount.textContent = characters;
+        wordCount.textContent = words;
+
+        if (characters > 200) {
+          alertMessage.style.display = "block";
+          alert("Character limit exceeded! Max 200 characters allowed.");
+        } else {
+          alertMessage.style.display = "none";
+        }
+      });
+    </script>
+  </body>
+</html>

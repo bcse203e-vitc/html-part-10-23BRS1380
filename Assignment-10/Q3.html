@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pizza Order Form</title>
+  </head>
+  <body>
+    <h2>Pizza Order Form</h2>
+
+    <form id="pizzaForm">
+      <h3>Select Pizza Size:</h3>
+      <label><input type="radio" name="size" value="Small" /> Small</label>
+      <label><input type="radio" name="size" value="Medium" /> Medium</label>
+      <label><input type="radio" name="size" value="Large" /> Large</label>
+
+      <h3>Select Toppings:</h3>
+      <label
+        ><input type="checkbox" name="topping" value="Cheese" /> Cheese</label
+      >
+      <label
+        ><input type="checkbox" name="topping" value="Pepperoni" />
+        Pepperoni</label
+      >
+      <label
+        ><input type="checkbox" name="topping" value="Mushrooms" />
+        Mushrooms</label
+      >
+      <label
+        ><input type="checkbox" name="topping" value="Olives" /> Olives</label
+      >
+
+      <br /><br />
+      <button type="button" onclick="submitOrder()">Submit Order</button>
+    </form>
+
+    <h3>Order Summary:</h3>
+    <p id="orderSummary"></p>
+
+    <script>
+      function submitOrder() {
+        let size = document.querySelector('input[name="size"]:checked');
+        let toppings = document.querySelectorAll(
+          'input[name="topping"]:checked'
+        );
+
+        if (!size) {
+          alert("Please select a pizza size.");
+          return;
+        }
+
+        let selectedToppings = [];
+        toppings.forEach((topping) => selectedToppings.push(topping.value));
+
+        let summary = `You ordered a ${size.value} pizza with ${
+          selectedToppings.length > 0
+            ? selectedToppings.join(", ")
+            : "no toppings"
+        }.`;
+        document.getElementById("orderSummary").innerText = summary;
+      }
+    </script>
+  </body>
+</html>

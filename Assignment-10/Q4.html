@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multiplication Table Generator</title>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 8px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Multiplication Table Generator</h1>
+
+    <h2>Enter a Number</h2>
+    <label for="number">Number:</label>
+    <input type="number" id="number" min="1" required />
+    <button type="button" onclick="generateTable()">Generate Table</button>
+
+    <h3>Multiplication Table:</h3>
+    <table id="multiplicationTable"></table>
+
+    <script>
+      function generateTable() {
+        let num = document.getElementById("number").value;
+        let table = document.getElementById("multiplicationTable");
+
+        if (!num) {
+          alert("Please enter a number.");
+          return;
+        }
+
+        num = parseInt(num);
+        table.innerHTML = "";
+
+        let headerRow = table.insertRow();
+        let headerCell1 = headerRow.insertCell(0);
+        let headerCell2 = headerRow.insertCell(1);
+        let headerCell3 = headerRow.insertCell(2);
+
+        headerCell1.innerHTML = "Multiplier";
+        headerCell2.innerHTML = "x";
+        headerCell3.innerHTML = num;
+
+        for (let i = 1; i <= 10; i++) {
+          let row = table.insertRow();
+          row.insertCell(0).innerHTML = i;
+          row.insertCell(1).innerHTML = "x";
+          row.insertCell(2).innerHTML = i * num;
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Layered Image Gallery</title>
+    <style>
+      body {
+        text-align: center;
+        font-family: Arial, sans-serif;
+        position: relative;
+        height: 100vh;
+        background-color: #f4f4f4;
+        overflow: hidden;
+      }
+
+      h1 {
+        position: relative;
+        z-index: 10;
+      }
+
+      .gallery {
+        position: relative;
+        width: 100%;
+        height: 80vh;
+      }
+
+      .gallery img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+        transition: transform 0.3s ease, z-index 0.3s ease;
+        cursor: pointer;
+      }
+
+      .gallery img:first-child {
+        height: 400px;
+        z-index: 1;
+      }
+      .gallery img:nth-child(2) {
+        height: 200px;
+        z-index: 2;
+      }
+      .gallery img:last-child {
+        height: 100px;
+        z-index: 3;
+      }
+
+      .gallery img:hover {
+        transform: translate(-50%, -50%) scale(1.1);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Layered Image Gallery</h1>
+    <div class="gallery">
+      <img src="1.jpg" alt="Image 1" onclick="bringToFront(this)" />
+      <img src="2.jpg" alt="Image 2" onclick="bringToFront(this)" />
+      <img src="3.jpg" alt="Image 3" onclick="bringToFront(this)" />
+    </div>
+
+    <script>
+      function bringToFront(image) {
+        let maxZIndex = 0;
+        document.querySelectorAll(".gallery img").forEach((img) => {
+          let zIndex = parseInt(window.getComputedStyle(img).zIndex);
+          if (zIndex > maxZIndex) {
+            maxZIndex = zIndex;
+          }
+        });
+        image.style.zIndex = maxZIndex + 1;
+      }
+    </script>
+  </body>
+</html>
